@@ -17,8 +17,7 @@ type _TabBarProps = { tab: string }
 
 const PAGES = [
   { link: '/', tab: Tabs.INTRO },
-  { link: '/hiragana', tab: Tabs.HIRAGANA },
-  { link: '/katakana', tab: Tabs.KATAKANA },
+  { link: '/hangul', tab: Tabs.HANGUL },
   { link: '/study', tab: Tabs.STUDY },
   { link: '/extra', tab: Tabs.EXTRA },
   { isHiddenMobile: true, link: '/blog', tab: Tabs.BLOG },
