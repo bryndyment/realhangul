@@ -1,0 +1,11 @@
+protected_branches=("demo" "deploy" "main")
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+for branch in "${protected_branches[@]}"; do
+  if [ "$current_branch" = "$branch" ]; then
+    echo "error: local commits to \`$branch\` branch disallowed"
+    exit 1
+  fi
+done
+
+pnpx lint-staged
