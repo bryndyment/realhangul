@@ -11,7 +11,7 @@ import { FC } from 'react'
 export const HowIsHangulUsed: FC = () => (
   <Base tab="blog">
     <Top>
-      <Heading h1="Real Kana Blog" h2="How Is Hangul Used?" />
+      <Heading h1="Real Hangul Blog" h2="How Is Hangul Used?" />
 
       <Scrolling>
         <Typography>
@@ -27,7 +27,7 @@ export const HowIsHangulUsed: FC = () => (
         <List sx={TOP.list}>
           <ListItem sx={TOP.item}>
             <Typography>
-              <>Everyday writing in Korea, including signage, books, and official documents:</>
+              <>Everyday writing in Korean, including signage, books, and official documents:</>
 
               <Box component="span" sx={EXAMPLE}>
                 <Strong>안녕하세요</Strong>
