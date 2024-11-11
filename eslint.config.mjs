@@ -29,6 +29,7 @@ export default [
       'no-use-before-define': 'off',
       'perfectionist/sort-imports': ['error', { newlinesBetween: 'never' }],
       'prettier/prettier': ['error', { arrowParens: 'avoid', endOfLine: 'lf', printWidth: 160, semi: false, singleQuote: true, trailingComma: 'none' }],
+      'react/no-unescaped-entities': 'off',
       'react/react-in-jsx-scope': 'off',
       ...eslintPluginNext.configs.recommended.rules,
       ...eslintPluginReactHooks.configs.recommended.rules

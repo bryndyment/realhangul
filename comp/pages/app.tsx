@@ -17,9 +17,9 @@ export const App: FC = () => (
   <Base tab="app">
     <Box id="top" sx={{ ...TOP.main, ...LOCAL.top }}>
       <Box>
-        <Heading h1="Real Kana App" h2="For iOS" />
+        <Heading h1="Real Hangul App" h2="For iOS" />
 
-        <Typography>Learn hiragana and katakana — quickly.</Typography>
+        <Typography>Learn Hangul — quickly.</Typography>
 
         <List sx={TOP.list}>
           <ListItem sx={TOP.item}>

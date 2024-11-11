@@ -11,7 +11,7 @@ import { FC } from 'react'
 export const IntroducingWords: FC = () => (
   <Base tab="blog">
     <Top>
-      <Heading h1="Real Kana Blog" h2="Introducing Words" />
+      <Heading h1="Real Hangul Blog" h2="Introducing Words" />
 
       <Scrolling>
         <Typography>

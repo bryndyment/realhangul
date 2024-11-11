@@ -6,8 +6,8 @@ import { FC } from 'react'
 
 export const generateMetadata = buildMetadata({
   canonical: '/',
-  description: 'Learn hiragana and katakana with Real Kana.',
-  title: 'Learn Hiragana And Katakana : Real Kana'
+  description: 'Learn Hangul with Real Hangul.',
+  title: 'Learn Hangul : Real Hangul'
 })
 
 // components

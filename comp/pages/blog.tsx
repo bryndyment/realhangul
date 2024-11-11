@@ -9,10 +9,8 @@ import { FC } from 'react'
 // constants
 
 const LINKS = [
-  ['What Is Hiragana?', '/blog/what-is-hiragana'],
-  ['How Is Hiragana Used?', '/blog/how-is-hiragana-used'],
-  ['What Is Katakana?', '/blog/what-is-katakana'],
-  ['How Is Katakana Used?', '/blog/how-is-katakana-used'],
+  ['What Is Hangul?', '/blog/what-is-hangul'],
+  ['How Is Hangul Used?', '/blog/how-is-hangul-used'],
   ['Introducing High Scores', '/blog/introducing-high-scores'],
   ['Introducing Words', '/blog/introducing-words']
 ]
@@ -22,9 +20,9 @@ const LINKS = [
 export const Blog: FC = () => (
   <Base tab="blog">
     <Top>
-      <Heading h1="Real Kana Blog" h2="Hiragana &amp; Katakana" />
+      <Heading h1="Real Hangul Blog" h2="Hangul &amp; Hangul" />
 
-      <Typography>Here are a few useful articles about hiragana and katakana:</Typography>
+      <Typography>Here are a few useful articles about hangul:</Typography>
 
       {LINKS.map(item => (
         <Typography key={item[1]}>
