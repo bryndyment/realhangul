@@ -2181,7 +2181,7 @@ export const buildMetadata =
       canonical
     },
     description,
-    ...(robots ? { robots } : IS_LIVE ? {} : { robots: 'nofollow, noindex' }),
+    ...(robots ? { robots } : IS_LIVE ? { robots: 'nofollow, noindex' } : { robots: 'nofollow, noindex' }),
     title
   })
 

@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
-Sitemap: https://realkana.com/sitemap.txt
+Disallow: /
