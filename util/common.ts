@@ -31,9 +31,8 @@ export enum Tabs {
   APP = 'app',
   BLOG = 'blog',
   EXTRA = 'extra',
-  HIRAGANA = 'hiragana',
+  HANGUL = 'hangul',
   INTRO = 'intro',
-  KATAKANA = 'katakana',
   STUDY = 'study'
 }
 
