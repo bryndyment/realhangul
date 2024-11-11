@@ -11,8 +11,7 @@ import { FC } from 'react'
 
 const LOCAL = {
   credit: { alignItems: 'baseline', display: 'flex' },
-  hiragana: { [zMobileMediaQuery]: { '& span': { display: 'none' }, '&::before': { content: '"ひ"', display: 'inline-block', fontSize: 16, margin: -0.375 } } },
-  katakana: { [zMobileMediaQuery]: { '& span': { display: 'none' }, '&::before': { content: '"カ"', display: 'inline-block', fontSize: 16, margin: -0.375 } } },
+  hangul: { [zMobileMediaQuery]: { '&::before': { content: '"한"', display: 'inline-block', fontSize: 16, margin: -0.375 }, '& span': { display: 'none' } } },
   mobile: { [zMobileMediaQuery]: { display: 'none' } },
   top: { display: 'flex', justifyContent: 'space-between' },
   yori: { ml: 0.5, opacity: 0.3 }
@@ -24,24 +23,18 @@ export const Intro: FC = () => (
   <Base tab="intro">
     <Box id="top" sx={{ ...TOP.main, ...LOCAL.top }}>
       <Box>
-        <Heading h1="Real Kana" h2="Learn Hiragana &amp; Katakana" />
+        <Heading h1="Real Hangul" h2="Learn Korean Writing" />
 
         <Typography>
           <>It’s easy to use. Click </>
 
-          <ButtonLink href="/hiragana" sx={LINK.mainButtonRed}>
-            <Box component="span" sx={LOCAL.hiragana}>
-              <span>hiragana</span>
+          <ButtonLink href="/hangul" sx={LINK.mainButtonRed}>
+            <Box component="span" sx={LOCAL.hangul}>
+              <span>hangul</span>
             </Box>
           </ButtonLink>
 
           <> and/or </>
-
-          <ButtonLink href="/katakana" sx={LINK.mainButtonRed}>
-            <Box component="span" sx={LOCAL.katakana}>
-              <span>katakana</span>
-            </Box>
-          </ButtonLink>
 
           <> and choose which characters you’d like to study.</>
         </Typography>
