@@ -19,7 +19,7 @@ export const App: FC = () => (
       <Box>
         <Heading h1="Real Hangul App" h2="For iOS" />
 
-        <Typography>Learn Hangul — quickly.</Typography>
+        <Typography>Learn hangul — quickly.</Typography>
 
         <List sx={TOP.list}>
           <ListItem sx={TOP.item}>

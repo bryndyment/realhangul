@@ -19,45 +19,63 @@ export const WhatIsHangul: FC = () => (
         </Typography>
 
         <Typography>
-          <>The basic Hangul alphabet consists of 24 letters: 14 </>
+          <>The basic hangul alphabet consists of 24 letters: 14 </>
+
           <Link component={RouterLink} href="/hangul" sx={LINK.plain}>
             consonants
           </Link>
+
           <> and 10 </>
+
           <Link component={RouterLink} href="/hangul" sx={LINK.plain}>
             vowels
           </Link>
+
           <>. These combine to form syllable blocks used in writing Korean words.</>
         </Typography>
 
         <Typography>
-          Unlike many other writing systems, Hangul was deliberately created with a clear purpose and scientific design. The shapes of the consonants are based
+          Unlike many other writing systems, hangul was deliberately created with a clear purpose and scientific design. The shapes of the consonants are based
           on the shape of the mouth and tongue when pronouncing them, while the vowels are based on philosophical concepts of heaven (ㆍ), earth (ㅡ), and human
           (ㅣ).
         </Typography>
 
         <Typography>
           <>For example, the word </>
+
           <Strong>한글</Strong>
-          <> (Hangul) is made up of two syllables: </>
+
+          <> (hangul) is made up of two syllables: </>
+
           <Strong>한</Strong>
+
           <> </>
+
           <Em>(han)</Em>
+
           <> and </>
+
           <Strong>글</Strong>
+
           <> </>
+
           <Em>(gul)</Em>
+
           <>.</>
         </Typography>
 
         <Typography>
-          Hangul is remarkably easy to learn compared to other writing systems. Its logical structure and consistent rules make it possible for most people to
-          learn the basics within a few hours.
+          <>
+            Hangul is remarkably easy to learn compared to other writing systems. Its logical structure and consistent rules make it possible for most people to
+            learn the basics within a few hours.
+          </>
         </Typography>
 
         <Typography>
-          The simplicity of Hangul was intentional - it was created to promote literacy among common people at a time when only the elite could read and write
-          using Chinese characters.
+          <>
+            The simplicity of hangul was intentional - it was created to promote literacy among common people at a time when only the elite could read and write
+            using Chinese characters.
+          </>
         </Typography>
       </Scrolling>
     </Top>
