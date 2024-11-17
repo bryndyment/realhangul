@@ -21,7 +21,7 @@ type _StudyProps = { searchParams: { [key: string]: string } }
 
 export const metadata = {
   description: 'Type this character’s rōmaji equivalent.',
-  title: 'Study : Real Kana'
+  title: 'Study : Real hangul'
 }
 
 // constants
