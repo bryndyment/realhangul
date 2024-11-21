@@ -33,11 +33,13 @@ type _HangulPageProps = {
 }
 
 // constants
+
 const LOCAL: _Sx = {
   top: { background: 'none', display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between', pb: 0, [zMobileMediaQuery]: { pb: 0 } }
 }
 
 // components
+
 export const HangulPage: FC<_HangulPageProps> = ({ columns, id, label, link, linkLabel, next, previous, rangeEnd, rangeStart, tab, variant }) => (
   <Base tab={tab}>
     <Box id="top" sx={{ ...TOP.main, ...LOCAL.top }}>
