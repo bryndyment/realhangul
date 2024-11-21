@@ -41,8 +41,6 @@ export const WhatIsHangul: FC = () => (
         </Typography>
 
         <Typography>
-          <>For example, the word </>
-
           <Strong>한글</Strong>
 
           <> (hangul) is made up of two syllables: </>

@@ -21,6 +21,15 @@ export enum KanaGroups {
   KATAKANA_WORDS = 'katakanaWords'
 }
 
+export enum HangulGroups {
+  HANGUL = 'hangul',
+  HANGUL_DOUBLE = 'hangulDouble',
+  HANGUL_EXTENDED = 'hangulExtended',
+  HANGUL_JAMO = 'hangulJamo',
+  HANGUL_SYLLABLES = 'hangulSyllables',
+  HANGUL_WORDS = 'hangulWords'
+}
+
 export enum Phases {
   INITIAL,
   STARTED,
@@ -201,6 +210,44 @@ export const CHARS = new Map([
   ['ン', [2, 15]],
   ['ヴ', [3, 15]],
   ['ー', [6, 15]]
+])
+
+export const HANGUL_CHARS = new Map([
+  ['ㄱ', [0, 0]],
+  ['ㄴ', [1, 0]],
+  ['ㄷ', [2, 0]],
+  ['ㄹ', [3, 0]],
+  ['ㅁ', [4, 0]],
+  ['ㅂ', [5, 0]],
+  ['ㅅ', [6, 0]],
+  ['ㅇ', [7, 0]],
+  ['ㅈ', [8, 0]],
+  ['ㅊ', [9, 0]],
+  ['ㅋ', [0, 1]],
+  ['ㅌ', [1, 1]],
+  ['ㅍ', [2, 1]],
+  ['ㅎ', [3, 1]],
+  ['ㅏ', [4, 1]],
+  ['ㅐ', [5, 1]],
+  ['ㅑ', [6, 1]],
+  ['ㅒ', [7, 1]],
+  ['ㅓ', [8, 1]],
+  ['ㅔ', [9, 1]],
+  ['ㅕ', [0, 2]],
+  ['ㅖ', [1, 2]],
+  ['ㅗ', [2, 2]],
+  ['ㅘ', [3, 2]],
+  ['ㅙ', [4, 2]],
+  ['ㅚ', [5, 2]],
+  ['ㅛ', [6, 2]],
+  ['ㅜ', [7, 2]],
+  ['ㅝ', [8, 2]],
+  ['ㅞ', [9, 2]],
+  ['ㅟ', [0, 3]],
+  ['ㅠ', [1, 3]],
+  ['ㅡ', [2, 3]],
+  ['ㅢ', [3, 3]],
+  ['ㅣ', [4, 3]]
 ])
 
 export const COLUMNS: [string, string][][] = [
@@ -1768,6 +1815,58 @@ export const COLUMNS: [string, string][][] = [
     ['レントゲン', 'rentogen'],
     ['ロープウェイ', 'roopuwei'],
     ['ロマン', 'roman']
+  ]
+]
+
+export const HANGUL_ROWS = [
+  [
+    { hangul: 'ㄱ', label: 'g' },
+    { hangul: 'ㄴ', label: 'n' },
+    { hangul: 'ㄷ', label: 'd' },
+    { hangul: 'ㄹ', label: 'r/l' },
+    { hangul: 'ㅁ', label: 'm' }
+  ],
+  [
+    { hangul: 'ㅂ', label: 'b' },
+    { hangul: 'ㅅ', label: 's' },
+    { hangul: 'ㅇ', label: 'ng' },
+    { hangul: 'ㅈ', label: 'j' },
+    { hangul: 'ㅊ', label: 'ch' }
+  ],
+  [
+    { hangul: 'ㅋ', label: 'k' },
+    { hangul: 'ㅌ', label: 't' },
+    { hangul: 'ㅍ', label: 'p' },
+    { hangul: 'ㅎ', label: 'h' }
+  ],
+  [
+    { hangul: 'ㅏ', label: 'a' },
+    { hangul: 'ㅐ', label: 'ae' },
+    { hangul: 'ㅑ', label: 'ya' },
+    { hangul: 'ㅒ', label: 'yae' },
+    { hangul: 'ㅓ', label: 'eo' }
+  ],
+  [
+    { hangul: 'ㅔ', label: 'e' },
+    { hangul: 'ㅕ', label: 'yeo' },
+    { hangul: 'ㅖ', label: 'ye' },
+    { hangul: 'ㅗ', label: 'o' },
+    { hangul: 'ㅘ', label: 'wa' }
+  ],
+  [
+    { hangul: 'ㅙ', label: 'wae' },
+    { hangul: 'ㅚ', label: 'oe' },
+    { hangul: 'ㅛ', label: 'yo' },
+    { hangul: 'ㅜ', label: 'u' },
+    { hangul: 'ㅝ', label: 'wo' }
+  ],
+  [
+    { hangul: 'ㅞ', label: 'we' },
+    { hangul: 'ㅟ', label: 'wi' },
+    { hangul: 'ㅠ', label: 'yu' },
+    { hangul: 'ㅡ', label: 'eu' },
+    { hangul: 'ㅢ', label: 'ui' },
+    { hangul: 'ㅣ', label: 'i' }
   ]
 ]
 

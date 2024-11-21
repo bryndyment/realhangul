@@ -7,7 +7,7 @@ import { FC } from 'react'
 export const generateMetadata = buildMetadata({
   canonical: '/blog/introducing-high-scores',
   description: 'Introducing high scores.',
-  title: 'Introducing High Scores : Real Kana'
+  title: 'Introducing High Scores : Real Hangul'
 })
 
 // components
