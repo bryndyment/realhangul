@@ -1,27 +1,24 @@
 'use client'
 
-import { KanaGroups } from '@/util/common'
+import { HangulGroups } from '@/util/common'
 import { createContext, FC, ReactNode, useEffect, useMemo, useState } from 'react'
 
 // types
-
 type _AppContext = {
-  hiragana: number
-  hiraganaDouble: number
-  hiraganaWords: number
+  hangulCommonSyllables: number
+  hangulCompoundVowels: number
+  hangulDoubleConsonants: number
+  hangulSimpleConsonants: number
+  hangulSimpleVowels: number
+  hangulWords: number
   isContinuousPlay: boolean
   isMessageShowing: boolean
   isRandomOrder: boolean
-  isRepeatProblemKana: boolean
+  isRepeatProblemHangul: boolean
   isSpeedMode: boolean
-  katakana: number
-  katakanaDouble: number
-  katakanaExtended: number
-  katakanaWords: number
   message: string
   preview: number
   timestamp: number
-  typefaces: number
   updateContext: _UpdateContext
 }
 
@@ -30,45 +27,38 @@ type _ContextFunctions = (value: any) => void
 type _UpdateContext = (context: { [key: string]: boolean | number | string }) => void
 
 // context
-
 export const APP_CONTEXT = createContext<_AppContext | null>(null)
 
 // constants
-
 const DEFAULTS = new Map<string, boolean | number>([
   ['isContinuousPlay', false],
   ['isRandomOrder', true],
-  ['isRepeatProblemKana', false],
+  ['isRepeatProblemHangul', false],
   ['isSpeedMode', true],
   ['preview', 1],
-  ['typefaces', 0],
-  [KanaGroups.HIRAGANA, 0],
-  [KanaGroups.HIRAGANA_DOUBLE, 0],
-  [KanaGroups.HIRAGANA_WORDS, 0],
-  [KanaGroups.KATAKANA, 0],
-  [KanaGroups.KATAKANA_DOUBLE, 0],
-  [KanaGroups.KATAKANA_EXTENDED, 0],
-  [KanaGroups.KATAKANA_WORDS, 0]
+  [HangulGroups.HANGUL_COMMON_SYLLABLES, 0],
+  [HangulGroups.HANGUL_COMPOUND_VOWELS, 0],
+  [HangulGroups.HANGUL_DOUBLE_CONSONANTS, 0],
+  [HangulGroups.HANGUL_SIMPLE_CONSONANTS, 0],
+  [HangulGroups.HANGUL_SIMPLE_VOWELS, 0],
+  [HangulGroups.HANGUL_WORDS, 0]
 ])
 
 const TESTS = new Map<string, any>([
   ['isContinuousPlay', (value: boolean) => value === Boolean(value)],
   ['isRandomOrder', (value: boolean) => value === Boolean(value)],
-  ['isRepeatProblemKana', (value: boolean) => value === Boolean(value)],
+  ['isRepeatProblemHangul', (value: boolean) => value === Boolean(value)],
   ['isSpeedMode', (value: boolean) => value === Boolean(value)],
   ['preview', (value: number) => integerFromTo(value, 1, 9)],
-  ['typefaces', (value: number) => integerFromTo(value, 1, 511)],
-  [KanaGroups.HIRAGANA, (value: number) => integerFromTo(value, 1, 65535)],
-  [KanaGroups.HIRAGANA_DOUBLE, (value: number) => integerFromTo(value, 1, 4095)],
-  [KanaGroups.HIRAGANA_WORDS, (value: number) => integerFromTo(value, 1, 31)],
-  [KanaGroups.KATAKANA, (value: number) => integerFromTo(value, 1, 65535)],
-  [KanaGroups.KATAKANA_DOUBLE, (value: number) => integerFromTo(value, 1, 4095)],
-  [KanaGroups.KATAKANA_EXTENDED, (value: number) => integerFromTo(value, 1, 16383)],
-  [KanaGroups.KATAKANA_WORDS, (value: number) => integerFromTo(value, 1, 31)]
+  [HangulGroups.HANGUL_COMMON_SYLLABLES, (value: number) => integerFromTo(value, 1, 16383)],
+  [HangulGroups.HANGUL_COMPOUND_VOWELS, (value: number) => integerFromTo(value, 1, 4095)],
+  [HangulGroups.HANGUL_DOUBLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 4095)],
+  [HangulGroups.HANGUL_SIMPLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 65535)],
+  [HangulGroups.HANGUL_SIMPLE_VOWELS, (value: number) => integerFromTo(value, 1, 65535)],
+  [HangulGroups.HANGUL_WORDS, (value: number) => integerFromTo(value, 1, 31)]
 ])
 
 // functions
-
 const getPersistentState = (key: string) => {
   const value = JSON.parse(window.localStorage.getItem(key)!)
 
@@ -83,63 +73,54 @@ const integerFromTo = (value: boolean | number, from: number, to: number) =>
   typeof value === 'number' && value === Math.floor(value) && value >= from && value <= to
 
 // components
-
 export const AppContext: FC<_AppContextProps> = ({ children }) => {
-  const [error, setError] = useState('')
-  const [hiragana, setHiragana] = useState(0)
-  const [hiraganaDouble, setHiraganaDouble] = useState(0)
-  const [hiraganaWords, setHiraganaWords] = useState(0)
+  const [hangulSimpleVowels, setHangulSimpleVowels] = useState(0)
+  const [hangulCompoundVowels, setHangulCompoundVowels] = useState(0)
+  const [hangulSimpleConsonants, setHangulSimpleConsonants] = useState(0)
+  const [hangulDoubleConsonants, setHangulDoubleConsonants] = useState(0)
+  const [hangulCommonSyllables, setHangulCommonSyllables] = useState(0)
+  const [hangulWords, setHangulWords] = useState(0)
   const [isContinuousPlay, setIsContinuousPlay] = useState(false)
   const [isInitialized, setIsInitialized] = useState(false)
   const [isRandomOrder, setIsRandomOrder] = useState(true)
-  const [isRepeatProblemKana, setIsRepeatProblemKana] = useState(false)
+  const [isRepeatProblemHangul, setIsRepeatProblemHangul] = useState(false)
   const [isSpeedMode, setIsSpeedMode] = useState(true)
-  const [katakana, setKatakana] = useState(0)
-  const [katakanaDouble, setKatakanaDouble] = useState(0)
-  const [katakanaExtended, setKatakanaExtended] = useState(0)
-  const [katakanaWords, setKatakanaWords] = useState(0)
   const [message, setMessage] = useState('')
   const [preview, setPreview] = useState(0)
   const [isMessageShowing, setIsMessageShowing] = useState(false)
   const [timestamp, setTimestamp] = useState(0)
-  const [typefaces, setTypefaces] = useState(0)
 
   useEffect(() => {
-    setHiragana(getPersistentState(KanaGroups.HIRAGANA))
-    setHiraganaDouble(getPersistentState(KanaGroups.HIRAGANA_DOUBLE))
-    setHiraganaWords(getPersistentState(KanaGroups.HIRAGANA_WORDS))
+    setHangulSimpleVowels(getPersistentState(HangulGroups.HANGUL_SIMPLE_VOWELS))
+    setHangulCompoundVowels(getPersistentState(HangulGroups.HANGUL_COMPOUND_VOWELS))
+    setHangulSimpleConsonants(getPersistentState(HangulGroups.HANGUL_SIMPLE_CONSONANTS))
+    setHangulDoubleConsonants(getPersistentState(HangulGroups.HANGUL_DOUBLE_CONSONANTS))
+    setHangulCommonSyllables(getPersistentState(HangulGroups.HANGUL_COMMON_SYLLABLES))
+    setHangulWords(getPersistentState(HangulGroups.HANGUL_WORDS))
     setIsContinuousPlay(getPersistentState('isContinuousPlay'))
     setIsInitialized(true)
     setIsRandomOrder(getPersistentState('isRandomOrder'))
-    setIsRepeatProblemKana(getPersistentState('isRepeatProblemKana'))
+    setIsRepeatProblemHangul(getPersistentState('isRepeatProblemHangul'))
     setIsSpeedMode(getPersistentState('isSpeedMode'))
-    setKatakana(getPersistentState(KanaGroups.KATAKANA))
-    setKatakanaDouble(getPersistentState(KanaGroups.KATAKANA_DOUBLE))
-    setKatakanaExtended(getPersistentState(KanaGroups.KATAKANA_EXTENDED))
-    setKatakanaWords(getPersistentState(KanaGroups.KATAKANA_WORDS))
     setPreview(getPersistentState('preview'))
-    setTypefaces(getPersistentState('typefaces'))
-  }, [setIsInitialized])
+  }, [])
 
   const appContext = useMemo(() => {
     const contextFunctions = new Map<string, _ContextFunctions>([
-      ['error', setError],
       ['isContinuousPlay', setIsContinuousPlay],
       ['isMessageShowing', setIsMessageShowing],
       ['isRandomOrder', setIsRandomOrder],
-      ['isRepeatProblemKana', setIsRepeatProblemKana],
+      ['isRepeatProblemHangul', setIsRepeatProblemHangul],
       ['isSpeedMode', setIsSpeedMode],
       ['message', setMessage],
       ['preview', setPreview],
       ['timestamp', setTimestamp],
-      ['typefaces', setTypefaces],
-      [KanaGroups.HIRAGANA, setHiragana],
-      [KanaGroups.HIRAGANA_DOUBLE, setHiraganaDouble],
-      [KanaGroups.HIRAGANA_WORDS, setHiraganaWords],
-      [KanaGroups.KATAKANA, setKatakana],
-      [KanaGroups.KATAKANA_DOUBLE, setKatakanaDouble],
-      [KanaGroups.KATAKANA_EXTENDED, setKatakanaExtended],
-      [KanaGroups.KATAKANA_WORDS, setKatakanaWords]
+      [HangulGroups.HANGUL_COMMON_SYLLABLES, setHangulCommonSyllables],
+      [HangulGroups.HANGUL_COMPOUND_VOWELS, setHangulCompoundVowels],
+      [HangulGroups.HANGUL_DOUBLE_CONSONANTS, setHangulDoubleConsonants],
+      [HangulGroups.HANGUL_SIMPLE_CONSONANTS, setHangulSimpleConsonants],
+      [HangulGroups.HANGUL_SIMPLE_VOWELS, setHangulSimpleVowels],
+      [HangulGroups.HANGUL_WORDS, setHangulWords]
     ])
 
     const updateContext: _UpdateContext = context => {
@@ -153,43 +134,37 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     }
 
     return {
-      error,
-      hiragana,
-      hiraganaDouble,
-      hiraganaWords,
+      hangulCommonSyllables,
+      hangulCompoundVowels,
+      hangulDoubleConsonants,
+      hangulSimpleConsonants,
+      hangulSimpleVowels,
+      hangulWords,
       isContinuousPlay,
       isMessageShowing,
       isRandomOrder,
-      isRepeatProblemKana,
+      isRepeatProblemHangul,
       isSpeedMode,
-      katakana,
-      katakanaDouble,
-      katakanaExtended,
-      katakanaWords,
       message,
       preview,
       timestamp,
-      typefaces,
       updateContext
     }
   }, [
-    error,
-    hiragana,
-    hiraganaDouble,
-    hiraganaWords,
+    hangulSimpleVowels,
+    hangulCompoundVowels,
+    hangulSimpleConsonants,
+    hangulDoubleConsonants,
+    hangulCommonSyllables,
+    hangulWords,
     isContinuousPlay,
     isMessageShowing,
     isRandomOrder,
-    isRepeatProblemKana,
+    isRepeatProblemHangul,
     isSpeedMode,
-    katakana,
-    katakanaDouble,
-    katakanaExtended,
-    katakanaWords,
     message,
     preview,
-    timestamp,
-    typefaces
+    timestamp
   ])
 
   return <APP_CONTEXT.Provider value={appContext}>{isInitialized ? children : null}</APP_CONTEXT.Provider>

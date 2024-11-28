@@ -13,14 +13,14 @@ const HangulMainPage = () => (
   <>
     <HangulPage
       columns={16}
-      id={HangulGroups.HANGUL}
+      id={HangulGroups.HANGUL_SIMPLE_VOWELS}
       label="hangul"
       link="/what-is-hangul"
-      next="/hangul/double"
+      next="/hangul/compoundVowels"
       rangeEnd={5}
       rangeStart={0}
       tab="hangul"
-      variant="Single Characters"
+      variant="Compound Vowels"
     />
   </>
 )
