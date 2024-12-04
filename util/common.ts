@@ -11,16 +11,6 @@ type _buildMetadataParams = {
   title: string
 }
 
-export enum KanaGroups {
-  HIRAGANA = 'hiragana',
-  HIRAGANA_DOUBLE = 'hiraganaDouble',
-  HIRAGANA_WORDS = 'hiraganaWords',
-  KATAKANA = 'katakana',
-  KATAKANA_DOUBLE = 'katakanaDouble',
-  KATAKANA_EXTENDED = 'katakanaExtended',
-  KATAKANA_WORDS = 'katakanaWords'
-}
-
 export enum HangulGroups {
   COMMON_SYLLABLES = 'commonSyllables',
   COMPOUND_VOWELS = 'compoundVowels',
