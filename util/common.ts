@@ -12,12 +12,12 @@ type _buildMetadataParams = {
 }
 
 export enum HangulGroups {
-  HANGUL_COMMON_SYLLABLES = 'hangulCommonSyllables',
-  HANGUL_COMPOUND_VOWELS = 'hangulCompoundVowels',
-  HANGUL_DOUBLE_CONSONANTS = 'hangulDoubleConsonants',
-  HANGUL_SIMPLE_CONSONANTS = 'hangulSimpleConsonants',
-  HANGUL_SIMPLE_VOWELS = 'hangulSimpleVowels',
-  HANGUL_WORDS = 'hangulWords'
+  COMMON_SYLLABLES = 'commonSyllables',
+  COMPOUND_VOWELS = 'compoundVowels',
+  DOUBLE_CONSONANTS = 'doubleConsonants',
+  SIMPLE_CONSONANTS = 'simpleConsonants',
+  SIMPLE_VOWELS = 'simpleVowels',
+  WORDS = 'words'
 }
 
 export enum Phases {
@@ -122,12 +122,12 @@ export const ALL_HANGUL = [
 ]
 
 export const PAGES = new Map([
-  [HangulGroups.HANGUL_COMMON_SYLLABLES, { columns: 6, offset: 39 }],
-  [HangulGroups.HANGUL_COMPOUND_VOWELS, { columns: 4, offset: 10 }],
-  [HangulGroups.HANGUL_DOUBLE_CONSONANTS, { columns: 5, offset: 34 }],
-  [HangulGroups.HANGUL_SIMPLE_CONSONANTS, { columns: 7, offset: 21 }],
-  [HangulGroups.HANGUL_SIMPLE_VOWELS, { columns: 5, offset: 0 }],
-  [HangulGroups.HANGUL_WORDS, { columns: 2, offset: 53 }]
+  [HangulGroups.COMMON_SYLLABLES, { columns: 6, offset: 39 }],
+  [HangulGroups.COMPOUND_VOWELS, { columns: 4, offset: 10 }],
+  [HangulGroups.DOUBLE_CONSONANTS, { columns: 5, offset: 34 }],
+  [HangulGroups.SIMPLE_CONSONANTS, { columns: 7, offset: 21 }],
+  [HangulGroups.SIMPLE_VOWELS, { columns: 5, offset: 0 }],
+  [HangulGroups.WORDS, { columns: 2, offset: 53 }]
 ])
 
 export const HANGUL_LABELS = new Map([
