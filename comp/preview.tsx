@@ -9,7 +9,7 @@ import { FC, MouseEvent } from 'react'
 
 // types
 
-type _PreviewProps = { isHiragana: boolean }
+type _PreviewProps = { isHangul: boolean }
 
 // constants
 
@@ -21,7 +21,7 @@ const LOCAL: _Sx = {
 
 // components
 
-export const Preview: FC<_PreviewProps> = ({ isHiragana }) => {
+export const Preview: FC<_PreviewProps> = ({ isHangul }) => {
   const { updateContext } = useAppContext()
 
   const handleClick = (event: MouseEvent) => updateContext({ preview: nthChild(event) })
@@ -30,10 +30,10 @@ export const Preview: FC<_PreviewProps> = ({ isHiragana }) => {
     <Box key={index} onClick={handleClick} sx={LOCAL.outer}>
       <Box sx={LOCAL.inner}>
         <Image
-          alt={isHiragana ? 'あ' : 'ア'}
+          alt={isHangul ? 'あ' : 'ア'}
           height={304}
           src="/kana-19.png"
-          style={{ left: isHiragana ? `-${190 * index}px` : `-${190 * (index + 1) - 95}px`, position: 'relative', top: isHiragana ? 0 : '-133px' }}
+          style={{ left: isHangul ? `-${190 * index}px` : `-${190 * (index + 1) - 95}px`, position: 'relative', top: isHangul ? 0 : '-133px' }}
           unoptimized
           width={1710}
         />

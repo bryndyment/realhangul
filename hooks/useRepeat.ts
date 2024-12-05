@@ -3,11 +3,11 @@ import { useState } from 'react'
 // hooks
 
 export const useRepeat = (value: boolean) => {
-  const [isRepeatProblemKana, setIsRepeatProblemKana] = useState(value)
+  const [isRepeatProblemHangul, setIsRepeatProblemHangul] = useState(value)
   const [repeatSlotList, setRepeatSlotList] = useState<(null | number)[]>(new Array(5).fill(null))
 
   const conditionallyAdd = (current: number) => {
-    if (isRepeatProblemKana && !repeatSlotList.includes(current)) {
+    if (isRepeatProblemHangul && !repeatSlotList.includes(current)) {
       const attempt = repeatSlotList.indexOf(null)
 
       if (attempt !== -1) {
@@ -19,7 +19,7 @@ export const useRepeat = (value: boolean) => {
   const conditionallyChoose = (current: number) => {
     let index: null | number = null
 
-    if (isRepeatProblemKana) {
+    if (isRepeatProblemHangul) {
       do {
         index = Math.floor(Math.random() * 5)
 
@@ -35,7 +35,7 @@ export const useRepeat = (value: boolean) => {
   }
 
   const reinitializeRepeat = (value: boolean) => {
-    setIsRepeatProblemKana(value)
+    setIsRepeatProblemHangul(value)
     setRepeatSlotList(new Array(5).fill(null))
   }
 

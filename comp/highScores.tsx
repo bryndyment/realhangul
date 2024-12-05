@@ -130,8 +130,7 @@ export const HighScores: FC<_HighScoresProps> = ({ count, phase, right, shown })
 }
 
 export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) => {
-  const { hiragana, hiraganaDouble, hiraganaWords, isContinuousPlay, isRandomOrder, katakana, katakanaDouble, katakanaExtended, katakanaWords } =
-    useAppContext()
+  const { commonSyllables, compoundVowels, doubleConsonants, isContinuousPlay, isRandomOrder, simpleConsonants, simpleVowels, words } = useAppContext()
 
   const [highScore, setHighScore] = useState<_HighScore>(INITIAL_HIGH_SCORE)
   const [highScoreContent, setHighScoreContent] = useState('')
@@ -142,7 +141,7 @@ export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) =
       areHighScoresEnabled: !isContinuousPlay && isRandomOrder,
       highScore,
       highScoreContent,
-      highScoreKey: `${hiragana}-${hiraganaDouble}-${hiraganaWords}-${katakana}-${katakanaDouble}-${katakanaExtended}-${katakanaWords}`,
+      highScoreKey: `${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}-${commonSyllables}-${words}`,
       highScoreKeys,
       setHighScore,
       setHighScoreContent,
@@ -152,25 +151,24 @@ export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) =
       highScore,
       highScoreContent,
       highScoreKeys,
-      hiragana,
-      hiraganaDouble,
-      hiraganaWords,
+      commonSyllables,
+      compoundVowels,
+      doubleConsonants,
       isContinuousPlay,
       isRandomOrder,
-      katakana,
-      katakanaDouble,
-      katakanaExtended,
-      katakanaWords
+      simpleConsonants,
+      simpleVowels,
+      words,
+      isContinuousPlay,
+      isRandomOrder
     ]
   )
 
   useEffect(() => {
-    const savedHighScore = window.localStorage.getItem(
-      `${hiragana}-${hiraganaDouble}-${hiraganaWords}-${katakana}-${katakanaDouble}-${katakanaExtended}-${katakanaWords}`
-    )
+    const savedHighScore = window.localStorage.getItem(`${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}-${commonSyllables}-${words}`)
 
     setHighScore(savedHighScore ? JSON.parse(savedHighScore) : INITIAL_HIGH_SCORE)
-  }, [hiragana, hiraganaDouble, hiraganaWords, katakana, katakanaDouble, katakanaExtended, katakanaWords])
+  }, [simpleVowels, compoundVowels, simpleConsonants, doubleConsonants, commonSyllables, words])
 
   return <HighScoresContext.Provider value={highScoresContext}>{children}</HighScoresContext.Provider>
 }

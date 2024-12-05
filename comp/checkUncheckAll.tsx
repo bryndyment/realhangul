@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppContext } from '@/hooks/useAppContext'
-import { calculate, KanaGroups, scale, scaleOff } from '@/util/common'
+import { calculate, HangulGroups, scale, scaleOff } from '@/util/common'
 import { LINK } from '@/util/styles'
 import { Box } from '@mui/material'
 import { FC } from 'react'
@@ -9,32 +9,32 @@ import { FC } from 'react'
 // types
 
 type _AllChecked = { [key: string]: number }
-type _CheckUncheckAllProps = { kanaPageId: KanaGroups }
+type _CheckUncheckAllProps = { hangulPageId: HangulGroups }
 
 // constants
 
 const ALL_CHECKED: _AllChecked = {
   hiragana: 65535,
   hiraganaDouble: 4095,
-  hiraganaWords: 31,
   katakana: 65535,
   katakanaDouble: 4095,
   katakanaExtended: 16383,
-  katakanaWords: 31
+  katakanaWords: 31,
+  words: 31
 }
 
 // components
 
-export const CheckUncheckAll: FC<_CheckUncheckAllProps> = ({ kanaPageId }) => {
+export const CheckUncheckAll: FC<_CheckUncheckAllProps> = ({ hangulPageId }) => {
   const context = useAppContext()
 
   const handleClick = () => {
     document.querySelectorAll<HTMLInputElement>('#kana input').forEach(elem => (elem.checked = check))
 
-    context.updateContext({ [kanaPageId]: calculate('#top table input') })
+    context.updateContext({ [hangulPageId]: calculate('#top table input') })
   }
 
-  const check = context[kanaPageId] !== ALL_CHECKED[kanaPageId]
+  const check = context[hangulPageId] !== ALL_CHECKED[hangulPageId]
 
   if (check) {
     return (

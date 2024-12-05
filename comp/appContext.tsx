@@ -5,12 +5,9 @@ import { createContext, FC, ReactNode, useEffect, useMemo, useState } from 'reac
 
 // types
 type _AppContext = {
-  hangulCommonSyllables: number
-  hangulCompoundVowels: number
-  hangulDoubleConsonants: number
-  hangulSimpleConsonants: number
-  hangulSimpleVowels: number
-  hangulWords: number
+  commonSyllables: number
+  compoundVowels: number
+  doubleConsonants: number
   isContinuousPlay: boolean
   isMessageShowing: boolean
   isRandomOrder: boolean
@@ -18,8 +15,12 @@ type _AppContext = {
   isSpeedMode: boolean
   message: string
   preview: number
+  simpleConsonants: number
+  simpleVowels: number
   timestamp: number
+  typefaces: number
   updateContext: _UpdateContext
+  words: number
 }
 
 type _AppContextProps = { children: ReactNode }
@@ -36,12 +37,13 @@ const DEFAULTS = new Map<string, boolean | number>([
   ['isRepeatProblemHangul', false],
   ['isSpeedMode', true],
   ['preview', 1],
-  [HangulGroups.HANGUL_COMMON_SYLLABLES, 0],
-  [HangulGroups.HANGUL_COMPOUND_VOWELS, 0],
-  [HangulGroups.HANGUL_DOUBLE_CONSONANTS, 0],
-  [HangulGroups.HANGUL_SIMPLE_CONSONANTS, 0],
-  [HangulGroups.HANGUL_SIMPLE_VOWELS, 0],
-  [HangulGroups.HANGUL_WORDS, 0]
+  ['typefaces', 0],
+  [HangulGroups.COMMON_SYLLABLES, 0],
+  [HangulGroups.COMPOUND_VOWELS, 0],
+  [HangulGroups.DOUBLE_CONSONANTS, 0],
+  [HangulGroups.SIMPLE_CONSONANTS, 0],
+  [HangulGroups.SIMPLE_VOWELS, 0],
+  [HangulGroups.WORDS, 0]
 ])
 
 const TESTS = new Map<string, any>([
@@ -50,12 +52,13 @@ const TESTS = new Map<string, any>([
   ['isRepeatProblemHangul', (value: boolean) => value === Boolean(value)],
   ['isSpeedMode', (value: boolean) => value === Boolean(value)],
   ['preview', (value: number) => integerFromTo(value, 1, 9)],
-  [HangulGroups.HANGUL_COMMON_SYLLABLES, (value: number) => integerFromTo(value, 1, 16383)],
-  [HangulGroups.HANGUL_COMPOUND_VOWELS, (value: number) => integerFromTo(value, 1, 4095)],
-  [HangulGroups.HANGUL_DOUBLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 4095)],
-  [HangulGroups.HANGUL_SIMPLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 65535)],
-  [HangulGroups.HANGUL_SIMPLE_VOWELS, (value: number) => integerFromTo(value, 1, 65535)],
-  [HangulGroups.HANGUL_WORDS, (value: number) => integerFromTo(value, 1, 31)]
+  ['typefaces', (value: number) => integerFromTo(value, 1, 511)],
+  [HangulGroups.COMMON_SYLLABLES, (value: number) => integerFromTo(value, 1, 16383)],
+  [HangulGroups.COMPOUND_VOWELS, (value: number) => integerFromTo(value, 1, 4095)],
+  [HangulGroups.DOUBLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 4095)],
+  [HangulGroups.SIMPLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 65535)],
+  [HangulGroups.SIMPLE_VOWELS, (value: number) => integerFromTo(value, 1, 65535)],
+  [HangulGroups.WORDS, (value: number) => integerFromTo(value, 1, 31)]
 ])
 
 // functions
@@ -74,12 +77,13 @@ const integerFromTo = (value: boolean | number, from: number, to: number) =>
 
 // components
 export const AppContext: FC<_AppContextProps> = ({ children }) => {
-  const [hangulSimpleVowels, setHangulSimpleVowels] = useState(0)
-  const [hangulCompoundVowels, setHangulCompoundVowels] = useState(0)
-  const [hangulSimpleConsonants, setHangulSimpleConsonants] = useState(0)
-  const [hangulDoubleConsonants, setHangulDoubleConsonants] = useState(0)
-  const [hangulCommonSyllables, setHangulCommonSyllables] = useState(0)
-  const [hangulWords, setHangulWords] = useState(0)
+  const [error, setError] = useState('')
+  const [simpleVowels, setSimpleVowels] = useState(0)
+  const [compoundVowels, setCompoundVowels] = useState(0)
+  const [simpleConsonants, setSimpleConsonants] = useState(0)
+  const [doubleConsonants, setDoubleConsonants] = useState(0)
+  const [commonSyllables, setCommonSyllables] = useState(0)
+  const [words, setWords] = useState(0)
   const [isContinuousPlay, setIsContinuousPlay] = useState(false)
   const [isInitialized, setIsInitialized] = useState(false)
   const [isRandomOrder, setIsRandomOrder] = useState(true)
@@ -89,24 +93,27 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
   const [preview, setPreview] = useState(0)
   const [isMessageShowing, setIsMessageShowing] = useState(false)
   const [timestamp, setTimestamp] = useState(0)
+  const [typefaces, setTypefaces] = useState(0)
 
   useEffect(() => {
-    setHangulSimpleVowels(getPersistentState(HangulGroups.HANGUL_SIMPLE_VOWELS))
-    setHangulCompoundVowels(getPersistentState(HangulGroups.HANGUL_COMPOUND_VOWELS))
-    setHangulSimpleConsonants(getPersistentState(HangulGroups.HANGUL_SIMPLE_CONSONANTS))
-    setHangulDoubleConsonants(getPersistentState(HangulGroups.HANGUL_DOUBLE_CONSONANTS))
-    setHangulCommonSyllables(getPersistentState(HangulGroups.HANGUL_COMMON_SYLLABLES))
-    setHangulWords(getPersistentState(HangulGroups.HANGUL_WORDS))
+    setSimpleVowels(getPersistentState(HangulGroups.SIMPLE_VOWELS))
+    setCompoundVowels(getPersistentState(HangulGroups.COMPOUND_VOWELS))
+    setSimpleConsonants(getPersistentState(HangulGroups.SIMPLE_CONSONANTS))
+    setDoubleConsonants(getPersistentState(HangulGroups.DOUBLE_CONSONANTS))
+    setCommonSyllables(getPersistentState(HangulGroups.COMMON_SYLLABLES))
+    setWords(getPersistentState(HangulGroups.WORDS))
     setIsContinuousPlay(getPersistentState('isContinuousPlay'))
     setIsInitialized(true)
     setIsRandomOrder(getPersistentState('isRandomOrder'))
     setIsRepeatProblemHangul(getPersistentState('isRepeatProblemHangul'))
     setIsSpeedMode(getPersistentState('isSpeedMode'))
     setPreview(getPersistentState('preview'))
-  }, [])
+    setTypefaces(getPersistentState('typefaces'))
+  }, [setIsInitialized])
 
   const appContext = useMemo(() => {
     const contextFunctions = new Map<string, _ContextFunctions>([
+      ['error', setError],
       ['isContinuousPlay', setIsContinuousPlay],
       ['isMessageShowing', setIsMessageShowing],
       ['isRandomOrder', setIsRandomOrder],
@@ -115,12 +122,13 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
       ['message', setMessage],
       ['preview', setPreview],
       ['timestamp', setTimestamp],
-      [HangulGroups.HANGUL_COMMON_SYLLABLES, setHangulCommonSyllables],
-      [HangulGroups.HANGUL_COMPOUND_VOWELS, setHangulCompoundVowels],
-      [HangulGroups.HANGUL_DOUBLE_CONSONANTS, setHangulDoubleConsonants],
-      [HangulGroups.HANGUL_SIMPLE_CONSONANTS, setHangulSimpleConsonants],
-      [HangulGroups.HANGUL_SIMPLE_VOWELS, setHangulSimpleVowels],
-      [HangulGroups.HANGUL_WORDS, setHangulWords]
+      ['typefaces', setTypefaces],
+      [HangulGroups.COMMON_SYLLABLES, setCommonSyllables],
+      [HangulGroups.COMPOUND_VOWELS, setCompoundVowels],
+      [HangulGroups.DOUBLE_CONSONANTS, setDoubleConsonants],
+      [HangulGroups.SIMPLE_CONSONANTS, setSimpleConsonants],
+      [HangulGroups.SIMPLE_VOWELS, setSimpleVowels],
+      [HangulGroups.WORDS, setWords]
     ])
 
     const updateContext: _UpdateContext = context => {
@@ -134,12 +142,10 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     }
 
     return {
-      hangulCommonSyllables,
-      hangulCompoundVowels,
-      hangulDoubleConsonants,
-      hangulSimpleConsonants,
-      hangulSimpleVowels,
-      hangulWords,
+      commonSyllables,
+      compoundVowels,
+      doubleConsonants,
+      error,
       isContinuousPlay,
       isMessageShowing,
       isRandomOrder,
@@ -147,16 +153,21 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
       isSpeedMode,
       message,
       preview,
+      simpleConsonants,
+      simpleVowels,
       timestamp,
-      updateContext
+      typefaces,
+      updateContext,
+      words
     }
   }, [
-    hangulSimpleVowels,
-    hangulCompoundVowels,
-    hangulSimpleConsonants,
-    hangulDoubleConsonants,
-    hangulCommonSyllables,
-    hangulWords,
+    error,
+    simpleVowels,
+    compoundVowels,
+    doubleConsonants,
+    simpleConsonants,
+    commonSyllables,
+    words,
     isContinuousPlay,
     isMessageShowing,
     isRandomOrder,
@@ -164,8 +175,8 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     isSpeedMode,
     message,
     preview,
-    timestamp
+    timestamp,
+    typefaces
   ])
-
   return <APP_CONTEXT.Provider value={appContext}>{isInitialized ? children : null}</APP_CONTEXT.Provider>
 }
