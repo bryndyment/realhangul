@@ -15,7 +15,7 @@ export const generateMetadata = buildMetadata({
 const HangulWordsPage: FC = () => (
   <HangulPage
     columns={5}
-    id={HangulGroups.HANGUL_WORDS}
+    id={HangulGroups.WORDS}
     label="hangul"
     link="/introducing-words"
     linkLabel="words"

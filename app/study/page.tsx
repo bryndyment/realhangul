@@ -11,15 +11,17 @@ type _StudyPageProps = { searchParams: Promise<{ [key: string]: string }> }
 export const generateMetadata = buildMetadata({
   canonical: '/study',
   description: 'Type this character’s rōmaji equivalent.',
-  title: 'Study : Real Kana'
+  title: 'Study : Real Hangul'
 })
 
 // components
 
-const StudyPage: FC<_StudyPageProps> = async props => {
-  const searchParams = await props.searchParams
+const StudyPage: FC<_StudyPageProps> = () => {
+  // const StudyPage: FC<_StudyPageProps> = async props => {
+  // const searchParams = await props.searchParams
 
-  return <Study searchParams={searchParams} />
+  // return <Study searchParams={searchParams} />
+  return <Study />
 }
 
 export default StudyPage

@@ -5,8 +5,8 @@ import { FC } from 'react'
 // metadata
 
 export const generateMetadata = buildMetadata({
-  canonical: '/hangul/simpleConsonants',
-  description: 'Choose some hangul simpleConsonants and click study.',
+  canonical: '/simpleConsonants',
+  description: 'Choose some  simple Consonants and click study.',
   title: 'Hangul – Simple Consonants : Real Hangul'
 })
 
@@ -15,12 +15,10 @@ export const generateMetadata = buildMetadata({
 const HangulSimpleConsonantsPage: FC = () => (
   <HangulPage
     columns={5}
-    id={HangulGroups.HANGUL_SIMPLE_CONSONANTS}
+    id={HangulGroups.SIMPLE_CONSONANTS}
     label="hangul"
-    link="/introducing-simpleConsonants"
-    linkLabel="simpleConsonants"
-    next="/hangul/doubleConsonants"
-    previous="/hangul/compoundVowels"
+    next="/doubleConsonants"
+    previous="/compoundVowels"
     rangeEnd={23}
     rangeStart={22}
     tab="hangul"

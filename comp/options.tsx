@@ -17,14 +17,14 @@ const LOCAL: _Sx = {
 const MESSAGE: { [key: string]: string } = {
   isContinuousPlayHelp: 'If checked, your score never resets; otherwise, it resets each time you complete a set.',
   isRandomOrderHelp: 'If checked, the kana are reshuffled each time you complete a set; otherwise, they’re always shown in the same order.',
-  isRepeatProblemKanaHelp: 'If checked, kana guessed incorrectly are shown again at a random point later in the set. Your score is not affected.',
+  isRepeatProblemHangulHelp: 'If checked, kana guessed incorrectly are shown again at a random point later in the set. Your score is not affected.',
   isSpeedModeHelp: 'If checked, typing a vowel (or ‘n’ for ん) automatically submits your guess; otherwise, use the spacebar to submit it.'
 }
 
 // components
 
 export const Options: FC = () => {
-  const { isContinuousPlay, isRandomOrder, isRepeatProblemKana, isSpeedMode, updateContext } = useAppContext()
+  const { isContinuousPlay, isRandomOrder, isRepeatProblemHangul, isSpeedMode, updateContext } = useAppContext()
 
   const handleChange = (event: ChangeEvent) => updateContext({ [(event as any).target.id]: (event as any).target.checked })
 
@@ -51,9 +51,9 @@ export const Options: FC = () => {
       </Box>
 
       <Box sx={LOCAL.option}>
-        <Checkbox checked={isRepeatProblemKana} id="isRepeatProblemKana" onChange={handleChange} size="small" sx={LOCAL.checkbox} />
+        <Checkbox checked={isRepeatProblemHangul} id="isRepeatProblemHangul" onChange={handleChange} size="small" sx={LOCAL.checkbox} />
 
-        <InputLabel htmlFor="isRepeatProblemKana" onMouseOut={hideMessage} onMouseOver={showMessage} sx={LOCAL.inputLabel}>
+        <InputLabel htmlFor="isRepeatProblemHangul" onMouseOut={hideMessage} onMouseOver={showMessage} sx={LOCAL.inputLabel}>
           Repeat Problem Kana
         </InputLabel>
       </Box>

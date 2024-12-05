@@ -125,13 +125,13 @@ const TabBar: FC<_TabBarProps> = ({ tab }) => {
         item.tab === tab ? (
           <ListItem key={index} sx={{ ...tabFrontSx, ...(item.isHiddenMobile && mobileSx) }}>
             <Link component={RouterLink} href={item.link} ref={linkRef} sx={{ ...LINK.main, ...linkSx, ...linkFrontSx }}>
-              <Box sx={{ ...((item.tab === Tabs.HIRAGANA || item.tab === Tabs.KATAKANA) && mobileSx) }}>{capitalize(item.tab)}</Box>
+              <Box sx={{ ...(item.tab === Tabs.HANGUL && mobileSx) }}>{capitalize(item.tab)}</Box>
             </Link>
           </ListItem>
         ) : (
           <ListItem key={index} sx={{ ...tabSx, ...(item.isHiddenMobile && mobileSx) }}>
             <Link component={RouterLink} href={item.link} onMouseOut={childScaleOff} onMouseOver={childScale} sx={{ ...LINK.main, ...linkSx }}>
-              <Box sx={{ ...((item.tab === Tabs.HIRAGANA || item.tab === Tabs.KATAKANA) && mobileSx) }}>{capitalize(item.tab)}</Box>
+              <Box sx={{ ...(item.tab === Tabs.HANGUL && mobileSx) }}>{capitalize(item.tab)}</Box>
             </Link>
           </ListItem>
         )
