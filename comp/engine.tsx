@@ -164,7 +164,7 @@ const shuffleKanas = (kanas: [string, string][], setKanas: (kanas: [string, stri
 // components
 
 export const Engine: FC<_EngineProps> = ({ initialKanas, setTopOpacity }) => {
-  const { isContinuousPlay, isRandomOrder, isRepeatProblemHangul, isSpeedMode, typefaces, words } = useAppContext()
+  const { isContinuousPlay, isRandomOrder, isRepeatProblemHangul, isSpeedMode, typefaces } = useAppContext()
   const isMobile = useMobileMediaQuery()
   const { conditionallyAdd, conditionallyChoose, reinitializeRepeat } = useRepeat(isRepeatProblemHangul)
   const [answerVisibility, setAnswerVisibility] = useState(Visibilities.HIDDEN)
@@ -329,7 +329,7 @@ export const Engine: FC<_EngineProps> = ({ initialKanas, setTopOpacity }) => {
           autoCorrect="off"
           autoFocus={!isMobile}
           inputProps={{
-            maxLength: words ? 17 : 3,
+            // maxLength: words ? 17 : 3,
             name: `g-${Math.random()}`,
             onKeyDown: event => event.key === KEY_SPACE && event.preventDefault(),
             onKeyUp: handleKeyUp,
@@ -337,7 +337,7 @@ export const Engine: FC<_EngineProps> = ({ initialKanas, setTopOpacity }) => {
           }}
           onChange={event => setGuess(event.currentTarget.value.trim().toLowerCase())}
           onFocus={() => scrollTo(0, 0)}
-          sx={words ? LOCAL.inputWide : LOCAL.input}
+          // sx={words ? LOCAL.inputWide : LOCAL.input}
           value={guess}
         />
 

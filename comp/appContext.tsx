@@ -5,7 +5,6 @@ import { createContext, FC, ReactNode, useEffect, useMemo, useState } from 'reac
 
 // types
 type _AppContext = {
-  commonSyllables: number
   compoundVowels: number
   doubleConsonants: number
   isContinuousPlay: boolean
@@ -20,7 +19,6 @@ type _AppContext = {
   timestamp: number
   typefaces: number
   updateContext: _UpdateContext
-  words: number
 }
 
 type _AppContextProps = { children: ReactNode }
@@ -38,12 +36,10 @@ const DEFAULTS = new Map<string, boolean | number>([
   ['isSpeedMode', true],
   ['preview', 1],
   ['typefaces', 0],
-  [HangulGroups.COMMON_SYLLABLES, 0],
   [HangulGroups.COMPOUND_VOWELS, 0],
   [HangulGroups.DOUBLE_CONSONANTS, 0],
   [HangulGroups.SIMPLE_CONSONANTS, 0],
-  [HangulGroups.SIMPLE_VOWELS, 0],
-  [HangulGroups.WORDS, 0]
+  [HangulGroups.SIMPLE_VOWELS, 0]
 ])
 
 const TESTS = new Map<string, any>([
@@ -53,12 +49,10 @@ const TESTS = new Map<string, any>([
   ['isSpeedMode', (value: boolean) => value === Boolean(value)],
   ['preview', (value: number) => integerFromTo(value, 1, 9)],
   ['typefaces', (value: number) => integerFromTo(value, 1, 511)],
-  [HangulGroups.COMMON_SYLLABLES, (value: number) => integerFromTo(value, 1, 16383)],
   [HangulGroups.COMPOUND_VOWELS, (value: number) => integerFromTo(value, 1, 4095)],
   [HangulGroups.DOUBLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 4095)],
   [HangulGroups.SIMPLE_CONSONANTS, (value: number) => integerFromTo(value, 1, 65535)],
-  [HangulGroups.SIMPLE_VOWELS, (value: number) => integerFromTo(value, 1, 65535)],
-  [HangulGroups.WORDS, (value: number) => integerFromTo(value, 1, 31)]
+  [HangulGroups.SIMPLE_VOWELS, (value: number) => integerFromTo(value, 1, 65535)]
 ])
 
 // functions
@@ -82,8 +76,6 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
   const [compoundVowels, setCompoundVowels] = useState(0)
   const [simpleConsonants, setSimpleConsonants] = useState(0)
   const [doubleConsonants, setDoubleConsonants] = useState(0)
-  const [commonSyllables, setCommonSyllables] = useState(0)
-  const [words, setWords] = useState(0)
   const [isContinuousPlay, setIsContinuousPlay] = useState(false)
   const [isInitialized, setIsInitialized] = useState(false)
   const [isRandomOrder, setIsRandomOrder] = useState(true)
@@ -100,8 +92,6 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     setCompoundVowels(getPersistentState(HangulGroups.COMPOUND_VOWELS))
     setSimpleConsonants(getPersistentState(HangulGroups.SIMPLE_CONSONANTS))
     setDoubleConsonants(getPersistentState(HangulGroups.DOUBLE_CONSONANTS))
-    setCommonSyllables(getPersistentState(HangulGroups.COMMON_SYLLABLES))
-    setWords(getPersistentState(HangulGroups.WORDS))
     setIsContinuousPlay(getPersistentState('isContinuousPlay'))
     setIsInitialized(true)
     setIsRandomOrder(getPersistentState('isRandomOrder'))
@@ -123,12 +113,10 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
       ['preview', setPreview],
       ['timestamp', setTimestamp],
       ['typefaces', setTypefaces],
-      [HangulGroups.COMMON_SYLLABLES, setCommonSyllables],
       [HangulGroups.COMPOUND_VOWELS, setCompoundVowels],
       [HangulGroups.DOUBLE_CONSONANTS, setDoubleConsonants],
       [HangulGroups.SIMPLE_CONSONANTS, setSimpleConsonants],
-      [HangulGroups.SIMPLE_VOWELS, setSimpleVowels],
-      [HangulGroups.WORDS, setWords]
+      [HangulGroups.SIMPLE_VOWELS, setSimpleVowels]
     ])
 
     const updateContext: _UpdateContext = context => {
@@ -142,7 +130,6 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     }
 
     return {
-      commonSyllables,
       compoundVowels,
       doubleConsonants,
       error,
@@ -157,8 +144,7 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
       simpleVowels,
       timestamp,
       typefaces,
-      updateContext,
-      words
+      updateContext
     }
   }, [
     error,
@@ -166,8 +152,6 @@ export const AppContext: FC<_AppContextProps> = ({ children }) => {
     compoundVowels,
     doubleConsonants,
     simpleConsonants,
-    commonSyllables,
-    words,
     isContinuousPlay,
     isMessageShowing,
     isRandomOrder,
