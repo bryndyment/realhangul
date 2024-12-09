@@ -7,8 +7,7 @@ import { Heading } from '@/comp/common'
 import { ConditionalLink } from '@/comp/conditionalLink'
 import { Hangul } from '@/comp/hangul'
 import { PostLink } from '@/comp/postLink'
-import { Preview } from '@/comp/preview'
-import { HangulGroups, Tabs } from '@/util/common'
+import { HangulGroups } from '@/util/common'
 import { _Sx, BOTTOM, LINK, TOP, zMobileMediaQuery } from '@/util/styles'
 import { Box, List, ListItem, Typography } from '@mui/material'
 import { capitalize } from 'lodash'
@@ -17,7 +16,7 @@ import { FC } from 'react'
 // types
 type _HangulPageProps = {
   canonical?: string
-  columns: number
+  columns: string[]
   description?: string
   id: HangulGroups
   label: string
@@ -26,8 +25,7 @@ type _HangulPageProps = {
   next?: string
   postLink?: string
   previous?: string
-  rangeEnd: number
-  rangeStart: number
+  rows: string[]
   tab: string
   variant: string
 }
@@ -40,7 +38,7 @@ const LOCAL: _Sx = {
 
 // components
 
-export const HangulPage: FC<_HangulPageProps> = ({ columns, id, label, link, linkLabel, next, previous, rangeEnd, rangeStart, tab, variant }) => (
+export const HangulPage: FC<_HangulPageProps> = ({ columns, id, label, link, linkLabel, next, previous, rows, tab, variant }) => (
   <Base tab={tab}>
     <Box id="top" sx={{ ...TOP.main, ...LOCAL.top }}>
       <Box id="hangul">
@@ -56,15 +54,12 @@ export const HangulPage: FC<_HangulPageProps> = ({ columns, id, label, link, lin
           <>.</>
         </Typography>
 
-        <Hangul columns={columns} hangulPageId={id} rangeEnd={rangeEnd} rangeStart={rangeStart} />
+        <Hangul columns={columns} hangulPageId={id} rows={rows} />
       </Box>
-
-      <Preview isHangul={tab === Tabs.HANGUL} />
     </Box>
 
     <Box sx={BOTTOM.main}>
-      <CheckUncheckAll hangulPageId={id} />
-
+      <CheckUncheckAll hangulPageId={id} /> {/* Kept intentionally to maintain the same UI as Kana  */}
       <List sx={BOTTOM.buttons}>
         <ListItem>
           <ConditionalLink label="Previous" link={previous} />

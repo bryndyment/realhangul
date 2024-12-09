@@ -130,7 +130,7 @@ export const HighScores: FC<_HighScoresProps> = ({ count, phase, right, shown })
 }
 
 export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) => {
-  const { commonSyllables, compoundVowels, doubleConsonants, isContinuousPlay, isRandomOrder, simpleConsonants, simpleVowels, words } = useAppContext()
+  const { compoundVowels, doubleConsonants, isContinuousPlay, isRandomOrder, simpleConsonants, simpleVowels } = useAppContext()
 
   const [highScore, setHighScore] = useState<_HighScore>(INITIAL_HIGH_SCORE)
   const [highScoreContent, setHighScoreContent] = useState('')
@@ -141,7 +141,7 @@ export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) =
       areHighScoresEnabled: !isContinuousPlay && isRandomOrder,
       highScore,
       highScoreContent,
-      highScoreKey: `${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}-${commonSyllables}-${words}`,
+      highScoreKey: `${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}`,
       highScoreKeys,
       setHighScore,
       setHighScoreContent,
@@ -151,24 +151,22 @@ export const HighScoresProvider: FC<_HighScoresProviderProps> = ({ children }) =
       highScore,
       highScoreContent,
       highScoreKeys,
-      commonSyllables,
       compoundVowels,
       doubleConsonants,
       isContinuousPlay,
       isRandomOrder,
       simpleConsonants,
       simpleVowels,
-      words,
       isContinuousPlay,
       isRandomOrder
     ]
   )
 
   useEffect(() => {
-    const savedHighScore = window.localStorage.getItem(`${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}-${commonSyllables}-${words}`)
+    const savedHighScore = window.localStorage.getItem(`${simpleVowels}-${compoundVowels}-${simpleConsonants}-${doubleConsonants}`)
 
     setHighScore(savedHighScore ? JSON.parse(savedHighScore) : INITIAL_HIGH_SCORE)
-  }, [simpleVowels, compoundVowels, simpleConsonants, doubleConsonants, commonSyllables, words])
+  }, [simpleVowels, compoundVowels, simpleConsonants, doubleConsonants])
 
   return <HighScoresContext.Provider value={highScoresContext}>{children}</HighScoresContext.Provider>
 }
