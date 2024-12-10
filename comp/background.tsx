@@ -1,26 +1,62 @@
 'use client'
 
-import { useMobileMediaQuery } from '@/hooks/useMobileMediaQuery'
 import { WHITE } from '@/util/styles'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
+
+// types
+interface Dimensions {
+  height: number
+  width: number
+}
 
 // components
 
-export const Background: FC = () => {
-  const isMobile = useMobileMediaQuery()
+export const Background: FC<{ containerRef: React.RefObject<HTMLDivElement> }> = ({ containerRef }) => {
+  const [dimensions, setDimensions] = useState<Dimensions | null>(null)
 
-  if (isMobile) return null
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        if (entry.contentRect) {
+          setDimensions({
+            height: entry.contentRect.height,
+            width: entry.contentRect.width
+          })
+        }
+      }
+    })
+
+    resizeObserver.observe(container)
+
+    return () => {
+      if (container) {
+        resizeObserver.unobserve(container)
+      }
+    }
+  }, [containerRef])
+
+  if (!dimensions) return null
 
   return (
     <Image
       alt="background"
-      height={600}
+      height={dimensions.height}
       priority
       src="/background.jpg"
-      style={{ backgroundColor: WHITE, borderRadius: 6, left: 0, position: 'absolute', top: 0, zIndex: -1 }}
+      style={{
+        backgroundColor: WHITE,
+        borderRadius: 6,
+        left: 0,
+        position: 'absolute',
+        top: 0,
+        zIndex: -1
+      }}
       unoptimized
-      width={594}
+      width={dimensions.width}
     />
   )
 }

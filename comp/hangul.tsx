@@ -30,7 +30,7 @@ export const Hangul: FC<_HangulProps> = ({ columns, rows }) => {
   return (
     <Box
       sx={{
-        bgcolor: 'rgba(255, 255, 255, 0.95)',
+        bgcolor: 'rgba(255, 255, 255, 0.79)',
         borderRadius: 1,
         cursor: 'pointer',
         my: 1.5,
