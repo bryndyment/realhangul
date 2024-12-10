@@ -10,7 +10,7 @@ import { ThemeContext } from '@/comp/themeContext'
 import { IS_LIVE } from '@/util/common'
 import { _Sx, BLACK, WHITE, zMobileMediaQuery } from '@/util/styles'
 import { Box, CssBaseline } from '@mui/material'
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useRef } from 'react'
 
 // types
 
@@ -52,28 +52,32 @@ const LOCAL: _Sx = {
 
 // components
 
-export const Client: FC<_ClientProps> = ({ children }) => (
-  <>
-    <ThemeContext>
-      <CssBaseline />
+export const Client: FC<_ClientProps> = ({ children }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
-      <AppContext>
-        <Box sx={LOCAL.all}>
-          <Box sx={LOCAL.content}>
-            <Background />
+  return (
+    <>
+      <ThemeContext>
+        <CssBaseline />
 
-            {children}
+        <AppContext>
+          <Box sx={LOCAL.all}>
+            <Box ref={containerRef} sx={LOCAL.content}>
+              <Background containerRef={containerRef} />
 
-            {IS_LIVE && <DesktopAds />}
+              {children}
+
+              {IS_LIVE && <DesktopAds />}
+            </Box>
+
+            {IS_LIVE && <MobileAd />}
           </Box>
+        </AppContext>
+      </ThemeContext>
 
-          {IS_LIVE && <MobileAd />}
-        </Box>
-      </AppContext>
-    </ThemeContext>
+      {IS_LIVE && <AdMetricsPro />}
 
-    {IS_LIVE && <AdMetricsPro />}
-
-    <PreloadImages />
-  </>
-)
+      <PreloadImages />
+    </>
+  )
+}
