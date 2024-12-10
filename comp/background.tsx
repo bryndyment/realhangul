@@ -12,7 +12,7 @@ interface Dimensions {
 
 // components
 
-export const Background: FC<{ containerRef: React.RefObject<HTMLDivElement> }> = ({ containerRef }) => {
+export const Background: FC<{ containerRef: React.RefObject<HTMLDivElement | null> }> = ({ containerRef }) => {
   const [dimensions, setDimensions] = useState<Dimensions | null>(null)
 
   useEffect(() => {
