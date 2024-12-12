@@ -21,7 +21,7 @@
     "@eslint/compat": "1.2.4",
     "@next/eslint-plugin-next": "15.1.0",
     "@types/lodash": "4.17.13",
-    "@types/node": "22.10.1",
+    "@types/node": "22.10.2",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
     "eslint": "9.16.0",
