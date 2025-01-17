@@ -13,13 +13,13 @@
     "@mui/system": "6.4.0",
     "date-fns": "4.1.0",
     "lodash": "4.17.21",
-    "next": "15.1.4",
+    "next": "15.1.5",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@eslint/compat": "1.2.5",
-    "@next/eslint-plugin-next": "15.1.4",
+    "@next/eslint-plugin-next": "15.1.5",
     "@types/lodash": "4.17.14",
     "@types/node": "22.10.7",
     "@types/react": "19.0.7",
