@@ -18,8 +18,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(react@19.0.0)
       '@hoologic/use-opening':
-        specifier: 1.0.2
-        version: 1.0.2(react@19.0.0)
+        specifier: 1.0.3
+        version: 1.0.3(react@19.0.0)
       '@mui/icons-material':
         specifier: 6.4.2
         version: 6.4.2(@mui/material@6.4.2(@emotion/react@11.14.0(@types/react@19.0.8)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.8)(react@19.0.0))(@types/react@19.0.8)(react@19.0.0))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.8)(react@19.0.0)
@@ -249,10 +249,10 @@ packages:
     peerDependencies:
       react: ^16 || ^17 || ^18
 
-  '@hoologic/use-opening@1.0.2':
-    resolution: {integrity: sha512-xkA8jOZ345vPxApWPUvXOBaYqIt1WOf6jAp+IWi07GLGB6xpTeBThGCrQpUTRo0ufLhM3XbDPMt3WkEkbcabAA==}
+  '@hoologic/use-opening@1.0.3':
+    resolution: {integrity: sha512-QL8SyyavLmncDWPUdqu4/u4EC4XGL88XgBQT7kVnerMMHfxsESBkkJ7UHmbrKTjlO4ymq4KlTvNuVhppSulrCA==}
     peerDependencies:
-      react: ^16 || ^17 || ^18
+      react: '>=16.8'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2215,7 +2215,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@hoologic/use-opening@1.0.2(react@19.0.0)':
+  '@hoologic/use-opening@1.0.3(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
